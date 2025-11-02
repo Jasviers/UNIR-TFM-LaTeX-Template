@@ -7,6 +7,7 @@
     \xdef\escuelav{\@escuela}
     \xdef\tipoTesisv{\@tipoTesis}
     \xdef\directorv{\@director}
+    \xdef\codirectorv{\@codirector}
     \xdef\ciudadv{\@ciudad}
 \makeatother
 
@@ -57,13 +58,14 @@
 \RequirePackage{geometry}
 \geometry{
 	paper=a4paper,  
-	left=3.5cm,
-	right=1.5cm,
+	left=3cm,
+	right=2cm,
 	top=2.5cm, 
 	bottom=2.5cm,
-	headheight=0.75cm,
-	headsep=1.5cm,
-	footskip=1.5cm,
+	headheight=1.25cm,
+    footheight=1.25cm,
+	headsep=0.75cm,
+	footskip=1cm,
 	%showframe, % Ver marcos
 }
 \usepackage{tabularx} % para tablas con anchos ajustables
@@ -77,17 +79,17 @@
 
 \fancypagestyle{mainmatter}{%
     \fancyhead{}%
-    \lhead{{\color{azul}\autorv}}%
+    \lhead{}%
     \chead{}%
-    \rhead{\masterv}%
+    \rhead{\fontsize{10}{12}\selectfont\calibrilight\autorv \\ \titulov}%
     \cfoot{}%
     \rfoot{\thepage\ of \getpagerefnumber{LastPage}}}
 
 \fancypagestyle{frontmatter}{%
     \fancyhead{}%
-    \lhead{{\color{azul}\autorv}}%
+    \lhead{}%
     \chead{}%
-    \rhead{\masterv}%
+    \rhead{\fontsize{10}{12}\selectfont\calibrilight\autorv \\ \titulov}%
     \cfoot{}%
     \rfoot{\thepage}}
 
@@ -102,16 +104,46 @@
 \usepackage{ifluatex,ifxetex}
 \ifnum\ifluatex1\else\ifxetex1\else0\fi\fi
     =1 %
-    \input{formato/fuentes/confTTF}
+    \usepackage{fontspec}
+    \setmainfont{Calibri}
+    \newfontfamily\calibrilight{Calibri Light}
 \else
+    \usepackage[scaled]{helvet}
+    \renewcommand\familydefault{\sfdefault}
     \input{formato/fuentes/confTFM}
 \fi
+
+% Paragraph and spacing to match guide: no indent, 6pt before/after paragraphs, 1.5 lines
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 0pt minus 0pt}
+\setstretch{1.5} % already present but ensure
+
+% Use titlesec to style headings (requires titlesec package)
+\usepackage{titlesec}
+\titleformat{\chapter}{\normalfont\calibrilight\color{azul}\fontsize{18}{22}\selectfont}{\thechapter}{1em}{}
+\titleformat{\section}{\normalfont\calibrilight\color{azul}\fontsize{14}{17}\selectfont}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\calibrilight\fontsize{12}{14}\selectfont}{\thesubsection}{1em}{}
+\titlespacing*{\chapter}{0pt}{6pt}{6pt}
+\titlespacing*{\section}{0pt}{6pt}{6pt}
+\titlespacing*{\subsection}{0pt}{6pt}{6pt}
+
+% Footnote size & spacing
+\renewcommand\footnotesize{\fontsize{10}{12}\selectfont}
+
+% Captions: label bold 12pt, name italic 12pt, source smaller
+\usepackage{caption}
+\captionsetup{
+  font=small,
+  labelfont={bf},
+  textfont={it},
+  skip=6pt
+}
 
 %--- Portada ---%
 \renewcommand*{\maketitle}{%
     \begin{titlepage}%
-        {\flushleft%
-            {\includegraphics[width=8.18cm]{./contenido/imagenes/logo-UNIR.pdf}}\par
+        {\centering%
+            {\includegraphics[width=8.18cm]{./contenido/imagenes/logo-UNIR.png}}\par
         }%
         \vspace{1cm}
         \begin{table}[h!]
@@ -119,13 +151,13 @@
         \setlength\arrayrulewidth{2pt}
             \begin{tabularx}{14.5cm}{ L{0.074} !{\color{azul}\vline}  L{0.931} }
                 & \\
-                & \fontsize{14}{14}\selectfont \georgiab \universidadv\\
+                & \fontsize{14}{14}\selectfont \calibrilight \universidadv\\
                 & \\
-                & \fontsize{18}{18}\selectfont \georgiab \escuelav \\
+                & \fontsize{18}{18}\selectfont \calibrilight \escuelav \\
                 & \\
-                & \fontsize{14}{14}\selectfont  \georgiab\masterv \\
+                & \fontsize{14}{14}\selectfont  \calibrilight\masterv \\
                 & \\ & \\ & \\
-                & \fontsize{42}{42}\selectfont \cambriamd \color{azul}   \titulov \\
+                & \fontsize{36}{36}\selectfont \color{azul}   \titulov \\
 
             \end{tabularx}
         \end{table}
@@ -133,12 +165,14 @@
         {\flushleft \fontsize{11}{11}\selectfont %
             \georgiab \tipoTesisv\par
                 \vspace{0.5cm}
-                Presentado por: \georgiamd \autorv \par
+                Presentado por: \calibrilight \autorv \par
                 \vspace{0.5cm}
-                \georgiab Director: \georgiamd \directorv \par
-                \vspace{3cm}
-                {\color{azul}%
-                \georgiab Ciudad: \georgiamd \ciudadv \par
-                \georgiab Fecha: \georgiamd \fechav \par}
+                \georgiab Director: \calibrilight \directorv \par
+                \vspace{0.5cm}
+                %\georgiab Codirector: \calibrilight \codirectorv \par  % Descomentar si hay codirector
+                %\vspace{0.5cm}
+                \georgiab Ciudad: \calibrilight \ciudadv \par
+                \vspace{0.5cm}
+                \georgiab Fecha: \calibrilight \fechav \par
         }
     \end{titlepage}}

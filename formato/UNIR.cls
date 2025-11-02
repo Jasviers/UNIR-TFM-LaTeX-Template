@@ -2,7 +2,7 @@
 \ProvidesClass{formato/UNIR}[2018/09/01 UNIR TFM LaTeX class]
 
 % Clase base (libro)
-\LoadClass[a4paper,11pt,oneside]{book}
+\LoadClass[a4paper,12pt,oneside]{book}
 \RequirePackage{courier}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T1]{fontenc}
@@ -36,6 +36,7 @@
 \def\master#1 {\gdef\@master{#1}}
 \def\tipoTesis#1{\gdef\@tipoTesis{#1}}
 \def\director#1{\gdef\@director{#1}}
+\def\codirector#1{\gdef\@codirector{#1}}
 \def\ciudad#1{\gdef\@ciudad{#1}}
 \gdef\keywords#1{\gdef\keywordsv{#1}}
 \gdef\keywordsEs#1{\gdef\keywordsESv{#1}}
@@ -51,7 +52,7 @@
 \newcommand{\cc}[1]{\begin{minipage}[c][0.5cm][c]{0.5cm}\centering#1\end{minipage}}
 
 %Captions de imágenes y tables con números consecutivos (no por capítulos)
-\RequirePackage[font=small,skip=2pt]{caption}
+\RequirePackage{caption}
 \RequirePackage{subcaption}
 \captionsetup{within=none}
 
@@ -89,6 +90,9 @@
 
 %Símbolos de monedas en ecuaciones
 \RequirePackage{eurosym}
+\usepackage{braket}
+\usepackage{pgfgantt}
+\usepackage{amsmath}
 
 %Números cardinales en inglés
 \RequirePackage[super]{nth}
