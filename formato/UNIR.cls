@@ -28,6 +28,7 @@
 \RequirePackage{xstring}
 \RequirePackage{etoolbox}
 
+\newcommand{\calibrilight}{\normalfont}
 \def\autor#1{\author{#1}}
 \def\titulo#1{\title{#1}}
 \def\fecha#1{\date{#1}}
@@ -52,7 +53,7 @@
 \newcommand{\cc}[1]{\begin{minipage}[c][0.5cm][c]{0.5cm}\centering#1\end{minipage}}
 
 %Captions de imágenes y tables con números consecutivos (no por capítulos)
-\RequirePackage{caption}
+\RequirePackage[font=small,skip=2pt]{caption}
 \RequirePackage{subcaption}
 \captionsetup{within=none}
 
@@ -96,4 +97,3 @@
 
 %Números cardinales en inglés
 \RequirePackage[super]{nth}
-
